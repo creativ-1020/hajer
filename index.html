@@ -14,6 +14,7 @@
             user-select: none;
         }
 
+
         /* ========== المتغيرات (Light / Dark) ========== */
         :root {
             --bg-gradient-light: linear-gradient(145deg, #fff6ed 0%, #ffe6d5 100%);
@@ -27,6 +28,7 @@
             --wave-light: rgba(230, 140, 70, 0.2);
         }
 
+
         body.dark {
             --bg-gradient-light: linear-gradient(145deg, #12122a 0%, #1a1a36 100%);
             --card-bg-light: rgba(35, 35, 55, 0.88);
@@ -38,6 +40,7 @@
             --message-bg-light: rgba(45, 45, 65, 0.9);
             --wave-light: rgba(255, 180, 70, 0.25);
         }
+
 
         body {
             min-height: 100vh;
@@ -52,6 +55,7 @@
             transition: background 0.3s, color 0.2s;
             color: var(--text-light);
         }
+
 
         /* ========== خلفية أنيميشن تغطي كامل الصفحة ========== */
         .animated-bg {
@@ -89,6 +93,7 @@
             100% { transform: rotate(-360deg) translate(3%, 3%); }
         }
 
+
         /* جسيمات متحركة في الخلفية */
         .particles {
             position: fixed;
@@ -117,6 +122,7 @@
             100% { transform: translate(70px, -100vh) scale(1.2); opacity: 0; }
         }
 
+
         /* زر الوضع المظلم */
         .darkmode-toggle {
             position: fixed;
@@ -143,6 +149,7 @@
             border-color: #d4a373;
         }
 
+
         /* البطاقة الرئيسية */
         .card {
             background: var(--card-bg-light);
@@ -159,6 +166,7 @@
             position: relative;
         }
 
+
         .greeting {
             font-size: 1.5rem;
             font-weight: 500;
@@ -169,6 +177,7 @@
             color: var(--accent-light);
             margin-left: 6px;
         }
+
 
         /* الزهرة */
         .flower-container {
@@ -195,6 +204,7 @@
             transition: filter 0.2s;
         }
 
+
         /* المحتوى المخفي */
         .info-section {
             margin-top: 1rem;
@@ -209,6 +219,7 @@
             transform: translateY(0);
         }
 
+
         .name-title {
             font-size: 1.8rem;
             font-weight: 800;
@@ -219,6 +230,7 @@
             letter-spacing: 1px;
             margin-bottom: 0.5rem;
         }
+
 
         /* العداد التنازلي (بدون ثواني) */
         .countdown-wrapper {
@@ -269,6 +281,7 @@
             color: #bc6f2c;
         }
 
+
         /* الرسالة الثابتة النابضة */
         .static-message {
             background: var(--message-bg-light);
@@ -292,6 +305,7 @@
             color: var(--accent-light);
         }
 
+
         /* تذييل الإهداء */
         .dedication {
             margin-top: 1.4rem;
@@ -306,6 +320,163 @@
             border-top-color: #4a3f2c;
         }
 
+
+        /* زر الإشعارات الدائري (رقم 1) */
+        .notification-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e84393;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: 0.2s;
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+        }
+        .notification-btn:hover {
+            transform: scale(1.05);
+            background: #c1357a;
+        }
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ffb347;
+            color: #5e3a22;
+            font-size: 0.7rem;
+            font-weight: bold;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 2px white;
+        }
+        body.dark .notification-badge {
+            background: #ffaa55;
+            color: #2a2a3f;
+        }
+
+
+        /* ========== نافذة الموسيقى (مودال احترافي) ========== */
+        .music-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .music-modal.show {
+            display: flex;
+        }
+        .modal-card {
+            background: var(--card-bg-light);
+            backdrop-filter: blur(20px);
+            border-radius: 2.2rem;
+            width: 90%;
+            max-width: 480px;
+            padding: 2rem 1.8rem;
+            text-align: center;
+            border: 1px solid var(--accent-light);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.4);
+            animation: fadeUp 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.2s;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(25px) scale(0.96);}
+            to { opacity: 1; transform: translateY(0) scale(1);}
+        }
+        .modal-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .modal-card h3 i {
+            font-size: 1.6rem;
+        }
+        .music-decoration {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+            margin: 0.8rem auto 1.5rem auto;
+            border-radius: 2px;
+        }
+        .audio-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin: 1.8rem 0 1rem;
+        }
+        .audio-controls button {
+            background: rgba(255,255,240,0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--accent-light);
+            border-radius: 60px;
+            padding: 10px 22px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+        }
+        .audio-controls button i {
+            font-size: 1rem;
+        }
+        .audio-controls button:hover {
+            background: var(--accent-light);
+            color: #1e1e2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+            border-color: transparent;
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            color: var(--accent-light);
+            opacity: 0.7;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        .close-modal:hover {
+            opacity: 1;
+            transform: scale(1.02);
+            color: var(--text-light);
+        }
+        /* إزالة أي نصوص إضافية غير مرغوب فيها */
+        .modal-card .file-hint, .modal-card .song-title {
+            display: none;
+        }
         @media (max-width: 550px) {
             .card { padding: 1.2rem; }
             .flower-svg { width: 130px; height: 130px; }
@@ -314,9 +485,10 @@
             .countdown-item { min-width: 65px; padding: 0.2rem 0.5rem; }
             .static-message { font-size: 0.8rem; padding: 0.6rem; }
             .greeting { font-size: 1.2rem; }
+            .audio-controls button { padding: 6px 16px; font-size: 0.85rem; }
+            .modal-card { padding: 1.5rem; }
+            .modal-card h3 { font-size: 1.5rem; }
         }
-
-        /* تحسين ألوان الوضع النهاري (تباين أفضل) */
         body:not(.dark) .static-message {
             background: #fff9f0;
             border-color: #e6b87a;
@@ -331,7 +503,6 @@
         body:not(.dark) .dedication {
             color: #aa683e;
         }
-
         .confetti-canvas {
             position: fixed;
             top: 0;
@@ -345,6 +516,7 @@
 </head>
 <body>
 
+
 <!-- طبقات الأنيميشن (تغطي الشاشة بأكملها) -->
 <div class="animated-bg">
     <div class="wave"></div>
@@ -353,14 +525,17 @@
 <div class="particles" id="particlesContainer"></div>
 <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
 
+
 <div class="darkmode-toggle" id="darkModeToggle">
     <i class="fas fa-moon"></i> <span>الوضع المظلم</span>
 </div>
+
 
 <div class="card">
     <div class="greeting">
         <i class="fas fa-hand-sparkles"></i> أهديك زهرة
     </div>
+
 
     <div class="flower-container" id="flowerBtn">
         <svg class="flower-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -395,22 +570,53 @@
         </svg>
     </div>
 
+
     <div id="infoPanel" class="info-section">
         <div class="name-title">🌸 هاجر حسين البنا 🌸</div>
         <div id="countdownContainer" class="countdown-wrapper">
             <!-- سيتم تعبئته بواسطة JS -->
         </div>
         <div class="static-message">
-            <i class="fas fa-quote-right"></i> 
+            <i class="fas fa-quote-right"></i>
             لا تحسبن المجد تمرًا أنت آكله ... لن تبلغ المجد حتى تلعق الصبرا
             <i class="fas fa-quote-left"></i>
         </div>
     </div>
 
+
     <div class="dedication">
         ✨ إهداء إلى هاجر حسين البنا ✨
     </div>
 </div>
+
+
+<!-- زر الإشعارات (رقم 1) -->
+<button class="notification-btn" id="notificationBtn">
+    <i class="fas fa-music"></i>
+    <span class="notification-badge">1</span>
+</button>
+
+
+<!-- النافذة المنبثقة (مشغل الموسيقى) - تم التعديل بشكل احترافي -->
+<div id="musicModal" class="music-modal">
+    <div class="modal-card">
+        <h3><i class="fas fa-music"></i> هدية موسيقية <i class="fas fa-headphones-alt"></i></h3>
+        <div class="music-decoration"></div>
+        <!-- تم إزالة عنوان الأغنية ونص "ضع ملف الأغنية" نهائياً -->
+        <audio id="songAudio" preload="auto">
+            <source src="audio.mp3" type="audio/mpeg">
+            متصفحك لا يدعم تشغيل الصوت.
+        </audio>
+        <div class="audio-controls">
+            <button id="playBtn"><i class="fas fa-play"></i> تشغيل</button>
+            <button id="pauseBtn"><i class="fas fa-pause"></i> إيقاف</button>
+            <button id="restartBtn"><i class="fas fa-undo-alt"></i> إعادة</button>
+            <button id="closeModalBtn"><i class="fas fa-times-circle"></i> إغلاق</button>
+        </div>
+        <!-- لا يوجد أي نصوص إضافية -->
+    </div>
+</div>
+
 
 <script>
     (function() {
@@ -421,13 +627,16 @@
         let birthdayMode = false;
         let countdownInterval = null;
 
+
         const BIRTH_MONTH = 9;   // أكتوبر (0 = يناير)
         const BIRTH_DAY = 5;
+
 
         function isBirthdayToday() {
             const today = new Date();
             return today.getMonth() === BIRTH_MONTH && today.getDate() === BIRTH_DAY;
         }
+
 
         function getNextBirthdayDate() {
             const now = new Date();
@@ -438,6 +647,7 @@
             }
             return birthday;
         }
+
 
         function updateCountdownDisplay() {
             if (birthdayMode) return;
@@ -454,10 +664,10 @@
             const days = Math.floor(diff / (1000*60*60*24));
             const hours = Math.floor((diff % 86400000) / 3600000);
             const minutes = Math.floor((diff % 3600000) / 60000);
-            // الثواني تم إزالتها تمامًا
             const daysStr = days < 10 ? '0'+days : days;
             const hoursStr = hours < 10 ? '0'+hours : hours;
             const minsStr = minutes < 10 ? '0'+minutes : minutes;
+
 
             countdownContainer.innerHTML = `
                 <div style="margin-bottom:8px; font-weight:bold;">🎂 المتبقي على عيد ميلادكِ 🎂</div>
@@ -469,13 +679,15 @@
             `;
         }
 
+
         function startCountdown() {
             if (countdownInterval) clearInterval(countdownInterval);
             updateCountdownDisplay();
             countdownInterval = setInterval(() => {
                 if (!birthdayMode) updateCountdownDisplay();
-            }, 60000); // تحديث كل دقيقة (لا حاجة لتحديث الثواني)
+            }, 60000);
         }
+
 
         function launchBirthdayCelebration() {
             birthdayMode = true;
@@ -489,6 +701,7 @@
             `;
             startFireworks();
         }
+
 
         function startFireworks() {
             const canvas = document.getElementById('confettiCanvas');
@@ -533,6 +746,7 @@
             }, 4500);
         }
 
+
         function revealContent() {
             if (revealed) return;
             revealed = true;
@@ -551,8 +765,10 @@
             }
         }
 
+
         flower.addEventListener('click', revealContent);
         flower.addEventListener('touchstart', revealContent, { passive: false });
+
 
         // Dark Mode
         const darkToggle = document.getElementById('darkModeToggle');
@@ -569,7 +785,8 @@
             }
         });
 
-        // إنشاء الجسيمات العائمة
+
+        // جسيمات الخلفية
         function createParticles() {
             const container = document.getElementById('particlesContainer');
             for (let i = 0; i < 130; i++) {
@@ -586,6 +803,53 @@
             }
         }
         createParticles();
+
+
+        // ========== وظائف الموسيقى (النافذة المنبثقة المعدلة) ==========
+        const audio = document.getElementById('songAudio');
+        const modal = document.getElementById('musicModal');
+        const notifBtn = document.getElementById('notificationBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        // الأزرار الجديدة (لا توجد أزرار +10 / -10)
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // فتح النافذة عند الضغط على زر الإشعارات
+        notifBtn.addEventListener('click', () => {
+            modal.classList.add('show');
+        });
+        
+        // إغلاق المودال
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+        // إغلاق بالضغط خارج المحتوى
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('show');
+        });
+
+        // التحكم في الصوت - زر التشغيل
+        playBtn.addEventListener('click', () => {
+            audio.play().catch(e => console.log('التشغيل التلقائي محظور، اضغط مرة أخرى', e));
+        });
+        
+        // زر الإيقاف: يوقف التشغيل فقط ولا يغير الموضع الحالي (لا يعيد للمقدمة)
+        pauseBtn.addEventListener('click', () => {
+            audio.pause();
+        });
+        
+        // زر الإعادة: يعيد الصوت إلى البداية ويشغله
+        restartBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log('لم يتم التشغيل بعد الإعادة', e));
+        });
+
+        // في حالة حدوث خطأ في تحميل الملف audio.mp3 (للتذكير فقط)
+        audio.addEventListener('error', () => {
+            console.warn('ملف audio.mp3 غير موجود أو غير مدعوم، يرجى وضعه بجانب الموقع');
+        });
 
         window.startConfettiAnimation = startFireworks;
     })();
