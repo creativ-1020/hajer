@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>هدية لهاجر حسين البنا | زهرة  والعمر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s;
+        }
+
+        /* الثيمات */
+        :root {
+            --bg-light: linear-gradient(145deg, #fef5e8 0%, #ffe6dc 100%);
+            --card-light: rgba(255, 250, 240, 0.75);
+            --text-light: #b46f3a;
+            --border-light: rgba(218,165,32,0.4);
+            --shadow-light: 0 25px 45px -12px rgba(0,0,0,0.2);
+            --countdown-bg-light: rgba(255, 235, 215, 0.7);
+        }
+
+        body.dark {
+            --bg-light: #1a1a2e;
+            --card-light: rgba(30, 30, 50, 0.85);
+            --text-light: #f0c48f;
+            --border-light: rgba(255, 215, 0, 0.5);
+            --shadow-light: 0 20px 35px -8px black;
+            --countdown-bg-light: rgba(0,0,0,0.5);
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Cairo', 'Poppins', system-ui, sans-serif;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.3s;
+        }
+
+        /* الجسيمات الذهبية المتحركة (خلفية احترافية) */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffd966, #ffb347);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatParticle 12s infinite ease-in-out;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            20% { opacity: 0.9; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) translateX(40px); opacity: 0; }
+        }
+
+        /* زر الوضع المظلم */
+        .darkmode-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 99;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            padding: 8px 18px;
+            border: 1px solid #ffc285;
+            color: #b87333;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        body.dark .darkmode-toggle {
+            background: #2a2a3f;
+            color: #ffdb9f;
+            border-color: #d4a373;
+        }
+
+        /* البطاقة الرئيسية */
+        .card {
+            background: var(--card-light);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            padding: 2rem 1.8rem;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            border: 1px solid var(--border-light);
+            transition: all 0.25s;
+            z-index: 10;
+        }
+
+        .greeting {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        .greeting i {
+            color: #e6a045;
+            margin-left: 8px;
+        }
+
+        /* الزهرة الجذابة (تأثير نبض خفيف وحجم جذاب) */
+        .flower-container {
+            margin: 1.2rem 0;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            animation: gentlePulse 2s infinite;
+        }
+        @keyframes gentlePulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px #ffbc6e);}
+            50% { transform: scale(1.02); filter: drop-shadow(0 0 12px #ffaa55);}
+            100% { transform: scale(1); filter: drop-shadow(0 0 2px #ffbc6e);}
+        }
+        .flower-container:active {
+            transform: scale(0.96);
+            animation: none;
+        }
+        .flower-svg {
+            width: 170px;
+            height: 170px;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.2));
+            transition: filter 0.2s;
+        }
+        .flower-container:hover .flower-svg {
+            filter: drop-shadow(0 12px 26px rgba(0,0,0,0.25));
+        }
+
+        /* المحتوى المخفي (يظهر بعد الضغط) */
+        .info-section {
+            margin-top: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        }
+        .info-section.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .name-title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c46f2e, #f3b362);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            margin-bottom: 0.7rem;
+        }
+
+        /* العداد التنازلي / حفلة الميلاد */
+        .countdown-wrapper {
+            background: var(--countdown-bg-light);
+            border-radius: 3rem;
+            padding: 0.8rem 1rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(4px);
+            border: 1px solid #ffdcb0;
+        }
+        .countdown-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .countdown-item {
+            background: rgba(255,255,240,0.6);
+            border-radius: 2rem;
+            padding: 0.3rem 0.8rem;
+            min-width: 75px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        body.dark .countdown-item {
+            background: #2b2b44;
+        }
+        .countdown-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #bb6b2e;
+            line-height: 1.2;
+            font-family: monospace;
+        }
+        body.dark .countdown-number {
+            color: #f5bc70;
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            color: #a16130;
+        }
+
+        .birthday-surprise {
+            background: linear-gradient(135deg, #ffecd2, #ffd6b0);
+            border-radius: 2rem;
+            padding: 0.9rem;
+            text-align: center;
+            animation: fadeGlow 1s ease;
+        }
+        @keyframes fadeGlow {
+            from { opacity: 0; transform: scale(0.95);}
+            to { opacity: 1; transform: scale(1);}
+        }
+        .birthday-surprise h3 {
+            font-size: 1.5rem;
+            color: #bc6f2c;
+        }
+        .confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* الرسائل التحفيزية المتجددة */
+        .message-rotator {
+            background: rgba(255,245,235,0.8);
+            border-radius: 60px;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #aa5f2c;
+            min-height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #e6b87a;
+        }
+        body.dark .message-rotator {
+            background: #2b2b3f;
+            color: #f5ca9e;
+            border-color: #f1b16b;
+        }
+        .rotating-text {
+            transition: opacity 0.25s;
+            line-height: 1.4;
+        }
+
+        .footer-note {
+            margin-top: 1.8rem;
+            font-size: 0.7rem;
+            color: #c38b58;
+            border-top: 1px solid #ffdfbe;
+            padding-top: 1rem;
+        }
+
+        @media (max-width: 550px) {
+            .card { padding: 1.5rem; }
+            .flower-svg { width: 130px; height: 130px; }
+            .name-title { font-size: 1.5rem; }
+            .countdown-number { font-size: 1.2rem; }
+            .countdown-item { min-width: 65px; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+<div class="particles" id="particlesContainer"></div>
+<div class="darkmode-toggle" id="darkModeToggle">
+    <i class="fas fa-moon"></i> <span>الوضع المظلم</span>
+</div>
+
+<div class="card">
+    <div class="greeting">
+        <i class="fas fa-spa"></i> أهديكِ زهرة 
+    </div>
+
+    <!-- زهرة فريدة ونابضة بالضغط -->
+    <div class="flower-container" id="flowerBtn">
+        <svg class="flower-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="petalGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#FFD966"/>
+                    <stop offset="70%" stop-color="#F4A460"/>
+                    <stop offset="100%" stop-color="#E68A2E"/>
+                </radialGradient>
+                <radialGradient id="centerGrad" cx="40%" cy="40%" r="60%">
+                    <stop offset="0%" stop-color="#FFE484"/>
+                    <stop offset="100%" stop-color="#E6A017"/>
+                </radialGradient>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                    <feMerge><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <g transform="translate(60,60)" filter="url(#glow)">
+                <path d="M0,-30 C15,-55 35,-55 40,-25 C45,5 20,10 0,5 C-20,10 -45,5 -40,-25 C-35,-55 -15,-55 0,-30Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.7" transform="rotate(0) translate(0,-3)"/>
+                <path d="M0,-30 C15,-55 35,-55 40,-25 C45,5 20,10 0,5 C-20,10 -45,5 -40,-25 C-35,-55 -15,-55 0,-30Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.7" transform="rotate(51.4) translate(0,-3)"/>
+                <path d="M0,-30 C15,-55 35,-55 40,-25 C45,5 20,10 0,5 C-20,10 -45,5 -40,-25 C-35,-55 -15,-55 0,-30Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.7" transform="rotate(102.8) translate(0,-3)"/>
+                <path d="M0,-30 C15,-55 35,-55 40,-25 C45,5 20,10 0,5 C-20,10 -45,5 -40,-25 C-35,-55 -15,-55 0,-30Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.7" transform="rotate(154.2) translate(0,-3)"/>
+                <path d="M0,-30 C15,-55 35,-55 40,-25 C45,5 20,10 0,5 C-20,10 -45,5 -40,-25 C-35,-55 -15,-55 0,-30Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.7" transform="rotate(205.6) translate(0,-3)"/>
+                <path d="M0,-30 C15,-55 35,-55 40,-25 C45,5 20,10 0,5 C-20,10 -45,5 -40,-25 C-35,-55 -15,-55 0,-30Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.7" transform="rotate(257) translate(0,-3)"/>
+                <path d="M0,-30 C15,-55 35,-55 40,-25 C45,5 20,10 0,5 C-20,10 -45,5 -40,-25 C-35,-55 -15,-55 0,-30Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.7" transform="rotate(308.4) translate(0,-3)"/>
+                <circle cx="0" cy="0" r="15" fill="url(#centerGrad)" stroke="#CC7B2E" stroke-width="1.2"/>
+                <circle cx="0" cy="0" r="8" fill="#FFE2A4" opacity="0.95"/>
+                <circle cx="-3" cy="-3" r="1.8" fill="#AB601A"/>
+                <circle cx="3" cy="2" r="1.5" fill="#AB601A"/>
+            </g>
+        </svg>
+    </div>
+
+    <div id="infoPanel" class="info-section">
+        <div class="name-title">🌸 هاجر حسين البنا 🌸</div>
+
+        <!-- حاوية العداد / حفلة الميلاد -->
+        <div id="countdownContainer" class="countdown-wrapper">
+            <!-- سيتم ملؤها بواسطة JS إما بعد تنازلي أو رسالة عيد ميلاد -->
+        </div>
+
+        <!-- رسائل تحفيزية متغيرة (جميلة وعامة) -->
+        <div class="message-rotator">
+            <div class="rotating-text" id="rotatingMsg">✨ كل يوم هو فرصة جديدة للتألق ✨</div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <i class="fas fa-hand-sparkles"></i> المس الزهرة لتظهر الهدية
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---- عناصر الصفحة ----
+        const flower = document.getElementById('flowerBtn');
+        const panel = document.getElementById('infoPanel');
+        const countdownContainer = document.getElementById('countdownContainer');
+        let revealed = false;
+        let birthdayMode = false;   // هل اليوم هو عيد ميلادها (5 أكتوبر)؟
+        let countdownInterval = null;
+
+        // ---- تحديد تاريخ الميلاد (5 أكتوبر) ----
+        const BIRTH_MONTH = 9;     // اكتوبر (0-index)
+        const BIRTH_DAY = 5;
+
+        function isBirthdayToday() {
+            const today = new Date();
+            return today.getMonth() === BIRTH_MONTH && today.getDate() === BIRTH_DAY;
+        }
+
+        // ---- العداد التنازلي لحساب الأيام المتبقية (إذا لم يكن عيد ميلاد) ----
+        function getNextBirthdayDate() {
+            const now = new Date();
+            let currentYear = now.getFullYear();
+            let birthday = new Date(currentYear, BIRTH_MONTH, BIRTH_DAY);
+            if (now > birthday) {
+                birthday = new Date(currentYear + 1, BIRTH_MONTH, BIRTH_DAY);
+            }
+            return birthday;
+        }
+
+        function updateCountdownDisplay() {
+            if (birthdayMode) return; // لو عيد ميلاد، لا نحدث العداد العادي
+            const target = getNextBirthdayDate();
+            const now = new Date();
+            const diff = target - now;
+            if (diff <= 0) {
+                // لو فات أو بالصدفة صفر
+                if (countdownContainer) countdownContainer.innerHTML = `<div class="birthday-surprise"><h3>🎉 اليوم عيد ميلادكِ! 🎉<br>🎂 كل عام وأنتِ مصدر إلهام 🎂</h3></div>`;
+                if (window.startConfettiAnimation) window.startConfettiAnimation();
+                return;
+            }
+            const days = Math.floor(diff / (1000*60*60*24));
+            const hours = Math.floor((diff % 86400000)/3600000);
+            const minutes = Math.floor((diff % 3600000)/60000);
+            const seconds = Math.floor((diff % 60000)/1000);
+
+            const daysStr = days < 10 ? '0'+days : days;
+            const hoursStr = hours < 10 ? '0'+hours : hours;
+            const minsStr = minutes < 10 ? '0'+minutes : minutes;
+            const secsStr = seconds < 10 ? '0'+seconds : seconds;
+
+            countdownContainer.innerHTML = `
+                <div style="margin-bottom:8px; font-weight:bold;">🎂 المتبقي على عيد ميلادكِ 🎂</div>
+                <div class="countdown-box">
+                    <div class="countdown-item"><div class="countdown-number">${daysStr}</div><div class="countdown-label">يوم</div></div>
+                    <div class="countdown-item"><div class="countdown-number">${hoursStr}</div><div class="countdown-label">ساعة</div></div>
+                    <div class="countdown-item"><div class="countdown-number">${minsStr}</div><div class="countdown-label">دقيقة</div></div>
+                    <div class="countdown-item"><div class="countdown-number">${secsStr}</div><div class="countdown-label">ثانية</div></div>
+                </div>
+            `;
+        }
+
+        function startCountdownTimer() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            updateCountdownDisplay();
+            countdownInterval = setInterval(() => {
+                if (!birthdayMode) updateCountdownDisplay();
+            }, 1000);
+        }
+
+        // ---- حفلة عيد الميلاد (رسالة تهنئة، بالونات وألعاب نارية) ----
+        function launchBirthdayCelebration() {
+            birthdayMode = true;
+            if (countdownInterval) clearInterval(countdownInterval);
+            countdownContainer.innerHTML = `
+                <div class="birthday-surprise">
+                    <h3>🎉🎂 كل عام وأنتِ نور الحياة 🎂🎉</h3>
+                    <p style="font-size:1rem; margin-top:6px;">عيد ميلاد سعيد يا هاجر حسين البنا 💖<br> ✨ يومكِ مليء بالفرح والإنجازات العظيمة ✨</p>
+                    <div style="font-size:1.3rem;">🎈🎁🎊</div>
+                </div>
+            `;
+            // تشغيل ألعاب نارية / بالونات (canvas بسيط)
+            startFireworks();
+        }
+
+        let fireworksInterval = null;
+        function startFireworks() {
+            const canvas = document.getElementById('confettiCanvas');
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            for (let i = 0; i < 80; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 6 + 2,
+                    color: `hsl(${Math.random() * 60 + 20}, 90%, 65%)`,
+                    speedY: Math.random() * 5 + 2,
+                    speedX: (Math.random() - 0.5) * 2,
+                    rot: 0
+                });
+            }
+            function draw() {
+                if (!canvas || !ctx) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+                for (let p of particles) {
+                    if (p.y < canvas.height + 50) alive = true;
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.rot += 0.1;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rot);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                    ctx.restore();
+                }
+                if (alive) requestAnimationFrame(draw);
+                else ctx.clearRect(0,0,canvas.width,canvas.height);
+            }
+            draw();
+            setTimeout(() => {
+                if (ctx) ctx.clearRect(0,0,canvas.width,canvas.height);
+            }, 5000);
+        }
+
+        // ---- الرسائل التحفيزية (جميلة وعامة، أكثر من 40 رسالة) ----
+        const motivationalMessages = [
+            "🌟 أنتِ قادرة على تحقيق أحلامكِ، خطوة بخطوة.",
+            "💪 كل يوم يمنحك فرصة جديدة لتصبحي أقوى.",
+            "🌸 ابتسامتكِ هي سر نجاحكِ؛ حافظي عليها.",
+            "✨ الإصرار يصنع المعجزات، وأنتِ خير مثال.",
+            "🌺 لا توجد طرق مختصرة للقمة، لكنكِ قادرة على الوصول.",
+            "💎 ثقتي في قدراتكِ لا حدود لها، تطلعي دائمًا للأعلى.",
+            "🕊️ امنحي نفسكِ لحظة فخر، فأنتِ تستحقين.",
+            "🍃 كل تحدٍ واجهتِه جعلكِ أكثر صلابة.",
+            "🌟 الأهداف الكبيرة تحتاج إلى عزيمة كبيرة، وأنتِ تمتلكينها.",
+            "🎯 الصعوبات هي محطات لبناء الشخصية، وانتِ تجاوزتيها باقتدار.",
+            "💖 أنتِ سر النجاح في كل مكان تذهبين إليه.",
+            "🌠 مستقبلكِ مليء بالإشراقات، استمري في التألق.",
+            "🏆 التحديات تصنع الأبطال، وأنتِ بطلة حقيقية.",
+            "⚡ أحلامكِ بحجم السماء، والأرض لا تحدكِ.",
+            "🎉 اليوم هو بداية لسلسلة انتصارات جديدة لكِ.",
+            "✨ أنتِ مصدر إلهام لكل من حولك.",
+            "💫 لا تنتظري الفرصة، اصنعيها بنفسك.",
+            "🌸 أنتِ مثل الزهرة، كل يوم تتفتحين أكثر.",
+            "🌻 التفاؤل سلاحكِ، والإيجابية طريقكِ.",
+            "⭐ أثبتِ للعالم أن المستحيل مجرد كلمة.",
+            "❤️ قوتك الداخلية هي أعظم ما لديكِ.",
+            "📚 كل علم تعلمتِه سيكون نبراسًا لكِ.",
+            "🎈 العمر يمضي، لكن بصمتكِ تبقى خالدة.",
+            "🌿 السعادة في رضاكِ عن نفسكِ وإنجازاتكِ.",
+            "🔆 يومكِ بداية لقصة نجاح جديدة، كوني فخورة."
+        ];
+
+        let msgIndex = 0;
+        const msgElement = document.getElementById('rotatingMsg');
+        function rotateMessage() {
+            if (!msgElement) return;
+            msgElement.style.opacity = '0';
+            setTimeout(() => {
+                msgIndex = (msgIndex + 1) % motivationalMessages.length;
+                msgElement.textContent = motivationalMessages[msgIndex];
+                msgElement.style.opacity = '1';
+            }, 250);
+        }
+
+        function startRotatingMessages() {
+            if (msgElement) msgElement.textContent = motivationalMessages[0];
+            setInterval(rotateMessage, 5500);
+        }
+
+        // ---- إظهار المحتوى عند الضغط على الزهرة (مرة واحدة) ----
+        function revealContent() {
+            if (revealed) return;
+            revealed = true;
+            panel.classList.add('show');
+            // تأثير اهتزاز الزهرة
+            const svgEl = document.querySelector('.flower-svg');
+            if(svgEl) {
+                svgEl.style.filter = 'drop-shadow(0 0 16px #ffb347)';
+                setTimeout(() => svgEl.style.filter = '', 500);
+            }
+
+            if (isBirthdayToday()) {
+                birthdayMode = true;
+                launchBirthdayCelebration();
+            } else {
+                birthdayMode = false;
+                startCountdownTimer();
+            }
+            startRotatingMessages();
+        }
+
+        flower.addEventListener('click', revealContent);
+        flower.addEventListener('touchstart', revealContent, { passive: false });
+
+        // ---- وضع Dark Mode ----
+        const darkToggle = document.getElementById('darkModeToggle');
+        darkToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            const icon = darkToggle.querySelector('i');
+            const span = darkToggle.querySelector('span');
+            if (document.body.classList.contains('dark')) {
+                icon.className = 'fas fa-sun';
+                span.innerText = ' وضع فاتح';
+            } else {
+                icon.className = 'fas fa-moon';
+                span.innerText = ' الوضع المظلم';
+            }
+        });
+
+        // ---- تحضير الجسيمات الخلفية ----
+        function createParticles() {
+            const container = document.getElementById('particlesContainer');
+            for (let i = 0; i < 90; i++) {
+                let p = document.createElement('div');
+                p.classList.add('particle');
+                let size = Math.random() * 7 + 2;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 12 + 's';
+                p.style.animationDuration = 6 + Math.random() * 8 + 's';
+                container.appendChild(p);
+            }
+        }
+        createParticles();
+
+        // حفظ المتغيرات العامة (للتأكد من أن العيد سيتم التعرف عليه)
+        window.startConfettiAnimation = startFireworks;
+    })();
+</script>
+</body>
+</html>
