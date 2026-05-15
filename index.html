@@ -1,3 +1,4 @@
+<!-- الكود الكامل مع إصلاح شريط التقدم (للنسخ) -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,15 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e84393'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-
-        /* ========== المتغيرات (Light / Dark) ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
         :root {
             --bg-gradient-light: linear-gradient(145deg, #fff6ed 0%, #ffe6d5 100%);
             --card-bg-light: rgba(255, 250, 240, 0.88);
@@ -27,8 +20,6 @@
             --message-bg-light: rgba(255, 248, 235, 0.95);
             --wave-light: rgba(230, 140, 70, 0.2);
         }
-
-
         body.dark {
             --bg-gradient-light: linear-gradient(145deg, #12122a 0%, #1a1a36 100%);
             --card-bg-light: rgba(35, 35, 55, 0.88);
@@ -40,8 +31,6 @@
             --message-bg-light: rgba(45, 45, 65, 0.9);
             --wave-light: rgba(255, 180, 70, 0.25);
         }
-
-
         body {
             min-height: 100vh;
             background: var(--bg-gradient-light);
@@ -55,9 +44,6 @@
             transition: background 0.3s, color 0.2s;
             color: var(--text-light);
         }
-
-
-        /* ========== خلفية أنيميشن تغطي كامل الصفحة ========== */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -92,9 +78,6 @@
             0% { transform: rotate(0deg) translate(3%, 3%); }
             100% { transform: rotate(-360deg) translate(3%, 3%); }
         }
-
-
-        /* جسيمات متحركة في الخلفية */
         .particles {
             position: fixed;
             top: 0;
@@ -121,9 +104,6 @@
             80% { opacity: 0.6; }
             100% { transform: translate(70px, -100vh) scale(1.2); opacity: 0; }
         }
-
-
-        /* زر الوضع المظلم */
         .darkmode-toggle {
             position: fixed;
             top: 20px;
@@ -148,9 +128,6 @@
             color: #ffdb9f;
             border-color: #d4a373;
         }
-
-
-        /* البطاقة الرئيسية */
         .card {
             background: var(--card-bg-light);
             backdrop-filter: blur(12px);
@@ -165,21 +142,13 @@
             z-index: 10;
             position: relative;
         }
-
-
         .greeting {
             font-size: 1.5rem;
             font-weight: 500;
             color: var(--text-light);
             margin-bottom: 0.8rem;
         }
-        .greeting i {
-            color: var(--accent-light);
-            margin-left: 6px;
-        }
-
-
-        /* الزهرة */
+        .greeting i { color: var(--accent-light); margin-left: 6px; }
         .flower-container {
             margin: 1rem 0;
             display: flex;
@@ -201,11 +170,7 @@
             width: 170px;
             height: 170px;
             filter: drop-shadow(0 10px 18px rgba(0,0,0,0.1));
-            transition: filter 0.2s;
         }
-
-
-        /* المحتوى المخفي */
         .info-section {
             margin-top: 1rem;
             opacity: 0;
@@ -218,8 +183,6 @@
             visibility: visible;
             transform: translateY(0);
         }
-
-
         .name-title {
             font-size: 1.8rem;
             font-weight: 800;
@@ -230,9 +193,6 @@
             letter-spacing: 1px;
             margin-bottom: 0.5rem;
         }
-
-
-        /* العداد التنازلي (بدون ثواني) */
         .countdown-wrapper {
             background: var(--countdown-bg-light);
             border-radius: 2rem;
@@ -253,36 +213,25 @@
             padding: 0.3rem 0.8rem;
             min-width: 80px;
         }
-        body.dark .countdown-item {
-            background: #2b2b44;
-        }
+        body.dark .countdown-item { background: #2b2b44; }
         .countdown-number {
             font-size: 1.5rem;
             font-weight: bold;
             color: #bb6b2e;
             line-height: 1.2;
         }
-        body.dark .countdown-number {
-            color: #f5bc70;
-        }
+        body.dark .countdown-number { color: #f5bc70; }
         .countdown-label {
             font-size: 0.7rem;
             color: #a16130;
         }
-        /* رسالة عيد الميلاد */
         .birthday-surprise {
             background: linear-gradient(135deg, #ffecd2, #ffd6b0);
             border-radius: 2rem;
             padding: 0.9rem;
             animation: fadeGlow 0.8s ease;
         }
-        .birthday-surprise h3 {
-            font-size: 1.3rem;
-            color: #bc6f2c;
-        }
-
-
-        /* الرسالة الثابتة النابضة */
+        .birthday-surprise h3 { font-size: 1.3rem; color: #bc6f2c; }
         .static-message {
             background: var(--message-bg-light);
             border-radius: 60px;
@@ -300,13 +249,7 @@
             50% { transform: scale(1.01); box-shadow: 0 0 0 6px rgba(218,165,32,0.1);}
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(218,165,32,0);}
         }
-        .static-message i {
-            margin: 0 6px;
-            color: var(--accent-light);
-        }
-
-
-        /* تذييل الإهداء */
+        .static-message i { margin: 0 6px; color: var(--accent-light); }
         .dedication {
             margin-top: 1.4rem;
             font-size: 0.75rem;
@@ -319,9 +262,6 @@
             color: #d9a97a;
             border-top-color: #4a3f2c;
         }
-
-
-        /* زر الإشعارات الدائري (رقم 1) */
         .notification-btn {
             position: fixed;
             bottom: 20px;
@@ -341,10 +281,7 @@
             color: white;
             font-size: 1.3rem;
         }
-        .notification-btn:hover {
-            transform: scale(1.05);
-            background: #c1357a;
-        }
+        .notification-btn:hover { transform: scale(1.05); background: #c1357a; }
         .notification-badge {
             position: absolute;
             top: -5px;
@@ -365,9 +302,7 @@
             background: #ffaa55;
             color: #2a2a3f;
         }
-
-
-        /* ========== نافذة الموسيقى (مودال احترافي) ========== */
+        /* مودال الموسيقى مع شريط تقدم LTR */
         .music-modal {
             display: none;
             position: fixed;
@@ -381,9 +316,7 @@
             align-items: center;
             justify-content: center;
         }
-        .music-modal.show {
-            display: flex;
-        }
+        .music-modal.show { display: flex; }
         .modal-card {
             background: var(--card-bg-light);
             backdrop-filter: blur(20px);
@@ -395,7 +328,6 @@
             border: 1px solid var(--accent-light);
             box-shadow: 0 30px 50px rgba(0,0,0,0.4);
             animation: fadeUp 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            transition: all 0.2s;
         }
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(25px) scale(0.96);}
@@ -411,9 +343,7 @@
             justify-content: center;
             gap: 12px;
         }
-        .modal-card h3 i {
-            font-size: 1.6rem;
-        }
+        .modal-card h3 i { font-size: 1.6rem; }
         .music-decoration {
             width: 60px;
             height: 2px;
@@ -421,12 +351,43 @@
             margin: 0.8rem auto 1.5rem auto;
             border-radius: 2px;
         }
+        /* حاوية شريط التقدم مع اتجاه LTR لضمان صحة التنقل */
+        .progress-container {
+            margin: 1rem 0 1.5rem 0;
+            direction: ltr; /* الحل السحري */
+        }
+        .progress-bar-bg {
+            background: rgba(0,0,0,0.2);
+            border-radius: 30px;
+            height: 6px;
+            cursor: pointer;
+            transition: height 0.1s;
+            margin-bottom: 0.5rem;
+        }
+        .progress-bar-bg:hover { height: 8px; }
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent-light), #ffb347);
+            border-radius: 30px;
+            width: 0%;
+            height: 100%;
+            transition: width 0.05s linear;
+        }
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            opacity: 0.8;
+            margin-top: 4px;
+        }
         .audio-controls {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 14px;
-            margin: 1.8rem 0 1rem;
+            margin: 1rem 0 0.5rem;
         }
         .audio-controls button {
             background: rgba(255,255,240,0.15);
@@ -444,9 +405,7 @@
             gap: 10px;
             font-family: inherit;
         }
-        .audio-controls button i {
-            font-size: 1rem;
-        }
+        .audio-controls button i { font-size: 1rem; }
         .audio-controls button:hover {
             background: var(--accent-light);
             color: #1e1e2a;
@@ -457,8 +416,8 @@
         .close-modal {
             background: none;
             border: none;
-            font-size: 1rem;
-            margin-top: 1rem;
+            font-size: 0.9rem;
+            margin-top: 1.2rem;
             cursor: pointer;
             color: var(--accent-light);
             opacity: 0.7;
@@ -472,10 +431,6 @@
             opacity: 1;
             transform: scale(1.02);
             color: var(--text-light);
-        }
-        /* إزالة أي نصوص إضافية غير مرغوب فيها */
-        .modal-card .file-hint, .modal-card .song-title {
-            display: none;
         }
         @media (max-width: 550px) {
             .card { padding: 1.2rem; }
@@ -494,15 +449,9 @@
             border-color: #e6b87a;
             color: #7a4c2c;
         }
-        body:not(.dark) .countdown-wrapper {
-            background: #fff4e6;
-        }
-        body:not(.dark) .countdown-number {
-            color: #c56a2c;
-        }
-        body:not(.dark) .dedication {
-            color: #aa683e;
-        }
+        body:not(.dark) .countdown-wrapper { background: #fff4e6; }
+        body:not(.dark) .countdown-number { color: #c56a2c; }
+        body:not(.dark) .dedication { color: #aa683e; }
         .confetti-canvas {
             position: fixed;
             top: 0;
@@ -515,45 +464,15 @@
     </style>
 </head>
 <body>
-
-
-<!-- طبقات الأنيميشن (تغطي الشاشة بأكملها) -->
-<div class="animated-bg">
-    <div class="wave"></div>
-    <div class="wave wave2"></div>
-</div>
+<div class="animated-bg"><div class="wave"></div><div class="wave wave2"></div></div>
 <div class="particles" id="particlesContainer"></div>
 <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
-
-
-<div class="darkmode-toggle" id="darkModeToggle">
-    <i class="fas fa-moon"></i> <span>الوضع المظلم</span>
-</div>
-
-
+<div class="darkmode-toggle" id="darkModeToggle"><i class="fas fa-moon"></i> <span>الوضع المظلم</span></div>
 <div class="card">
-    <div class="greeting">
-        <i class="fas fa-hand-sparkles"></i> أهديك زهرة
-    </div>
-
-
+    <div class="greeting"><i class="fas fa-hand-sparkles"></i> أهديك زهرة</div>
     <div class="flower-container" id="flowerBtn">
         <svg class="flower-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <radialGradient id="petalGrad" cx="45%" cy="45%" r="55%">
-                    <stop offset="0%" stop-color="#FFE0B5"/>
-                    <stop offset="65%" stop-color="#F5A65B"/>
-                    <stop offset="100%" stop-color="#E5852F"/>
-                </radialGradient>
-                <radialGradient id="centerGrad" cx="40%" cy="40%" r="55%">
-                    <stop offset="0%" stop-color="#FFEAA0"/>
-                    <stop offset="100%" stop-color="#DD951F"/>
-                </radialGradient>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="2.5"/>
-                    <feMerge><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-            </defs>
+            <defs><radialGradient id="petalGrad" cx="45%" cy="45%" r="55%"><stop offset="0%" stop-color="#FFE0B5"/><stop offset="65%" stop-color="#F5A65B"/><stop offset="100%" stop-color="#E5852F"/></radialGradient><radialGradient id="centerGrad" cx="40%" cy="40%" r="55%"><stop offset="0%" stop-color="#FFEAA0"/><stop offset="100%" stop-color="#DD951F"/></radialGradient><filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="2.5"/><feMerge><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
             <g transform="translate(60,60)" filter="url(#glow)">
                 <path d="M0,-32 C15,-57 35,-57 40,-27 C45,3 20,8 0,3 C-20,8 -45,3 -40,-27 C-35,-57 -15,-57 0,-32Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.8" transform="rotate(0) translate(0,-3)"/>
                 <path d="M0,-32 C15,-57 35,-57 40,-27 C45,3 20,8 0,3 C-20,8 -45,3 -40,-27 C-35,-57 -15,-57 0,-32Z" fill="url(#petalGrad)" stroke="#D67725" stroke-width="0.8" transform="rotate(51.4) translate(0,-3)"/>
@@ -569,289 +488,80 @@
             </g>
         </svg>
     </div>
-
-
     <div id="infoPanel" class="info-section">
         <div class="name-title">🌸 هاجر حسين البنا 🌸</div>
-        <div id="countdownContainer" class="countdown-wrapper">
-            <!-- سيتم تعبئته بواسطة JS -->
-        </div>
-        <div class="static-message">
-            <i class="fas fa-quote-right"></i>
-            لا تحسبن المجد تمرًا أنت آكله ... لن تبلغ المجد حتى تلعق الصبرا
-            <i class="fas fa-quote-left"></i>
-        </div>
+        <div id="countdownContainer" class="countdown-wrapper"></div>
+        <div class="static-message"><i class="fas fa-quote-right"></i> لا تحسبن المجد تمرًا أنت آكله ... لن تبلغ المجد حتى تلعق الصبرا <i class="fas fa-quote-left"></i></div>
     </div>
-
-
-    <div class="dedication">
-        ✨ إهداء إلى هاجر حسين البنا ✨
-    </div>
+    <div class="dedication">✨ إهداء إلى هاجر حسين البنا ✨</div>
 </div>
-
-
-<!-- زر الإشعارات (رقم 1) -->
-<button class="notification-btn" id="notificationBtn">
-    <i class="fas fa-music"></i>
-    <span class="notification-badge">1</span>
-</button>
-
-
-<!-- النافذة المنبثقة (مشغل الموسيقى) - تم التعديل بشكل احترافي -->
+<button class="notification-btn" id="notificationBtn"><i class="fas fa-music"></i><span class="notification-badge">1</span></button>
 <div id="musicModal" class="music-modal">
     <div class="modal-card">
         <h3><i class="fas fa-music"></i> هدية موسيقية <i class="fas fa-headphones-alt"></i></h3>
         <div class="music-decoration"></div>
-        <!-- تم إزالة عنوان الأغنية ونص "ضع ملف الأغنية" نهائياً -->
-        <audio id="songAudio" preload="auto">
-            <source src="audio.mp3" type="audio/mpeg">
-            متصفحك لا يدعم تشغيل الصوت.
-        </audio>
+        <audio id="songAudio" preload="auto"><source src="audio.mp3" type="audio/mpeg"></audio>
+        <div class="progress-container">
+            <div class="progress-bar-bg" id="progressBarBg"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="time-display"><span id="currentTime">00:00</span><span id="duration">00:00</span></div>
+        </div>
         <div class="audio-controls">
             <button id="playBtn"><i class="fas fa-play"></i> تشغيل</button>
             <button id="pauseBtn"><i class="fas fa-pause"></i> إيقاف</button>
             <button id="restartBtn"><i class="fas fa-undo-alt"></i> إعادة</button>
             <button id="closeModalBtn"><i class="fas fa-times-circle"></i> إغلاق</button>
         </div>
-        <!-- لا يوجد أي نصوص إضافية -->
     </div>
 </div>
-
-
 <script>
-    (function() {
+    (function(){
+        // الزهرة والمحتوى المخفي
         const flower = document.getElementById('flowerBtn');
         const panel = document.getElementById('infoPanel');
         const countdownContainer = document.getElementById('countdownContainer');
-        let revealed = false;
-        let birthdayMode = false;
-        let countdownInterval = null;
-
-
-        const BIRTH_MONTH = 9;   // أكتوبر (0 = يناير)
-        const BIRTH_DAY = 5;
-
-
-        function isBirthdayToday() {
-            const today = new Date();
-            return today.getMonth() === BIRTH_MONTH && today.getDate() === BIRTH_DAY;
+        let revealed = false, birthdayMode = false, countdownInterval = null;
+        const BIRTH_MONTH = 9, BIRTH_DAY = 5;
+        function isBirthdayToday(){ const d=new Date(); return d.getMonth()===BIRTH_MONTH && d.getDate()===BIRTH_DAY; }
+        function getNextBirthdayDate(){ const now=new Date(), year=now.getFullYear(); let bd=new Date(year, BIRTH_MONTH, BIRTH_DAY); if(now>bd) bd=new Date(year+1, BIRTH_MONTH, BIRTH_DAY); return bd; }
+        function updateCountdownDisplay(){
+            if(birthdayMode) return;
+            const target=getNextBirthdayDate(), now=new Date(), diff=target-now;
+            if(diff<=0){ countdownContainer.innerHTML=`<div class="birthday-surprise"><h3>🎉🎂 اليوم عيد ميلادكِ! 🎂🎉</h3><p style="margin-top:6px;">كل عام وأنتِ مصدر إلهام يا هاجر 💖</p><div>🎈🎁🎊</div></div>`; startFireworks(); return; }
+            const days=Math.floor(diff/(1000*60*60*24)), hours=Math.floor((diff%86400000)/3600000), minutes=Math.floor((diff%3600000)/60000);
+            countdownContainer.innerHTML=`<div style="margin-bottom:8px; font-weight:bold;">🎂 المتبقي على عيد ميلادكِ 🎂</div><div class="countdown-box"><div class="countdown-item"><div class="countdown-number">${days<10?'0'+days:days}</div><div class="countdown-label">يوم</div></div><div class="countdown-item"><div class="countdown-number">${hours<10?'0'+hours:hours}</div><div class="countdown-label">ساعة</div></div><div class="countdown-item"><div class="countdown-number">${minutes<10?'0'+minutes:minutes}</div><div class="countdown-label">دقيقة</div></div></div>`;
         }
-
-
-        function getNextBirthdayDate() {
-            const now = new Date();
-            let currentYear = now.getFullYear();
-            let birthday = new Date(currentYear, BIRTH_MONTH, BIRTH_DAY);
-            if (now > birthday) {
-                birthday = new Date(currentYear + 1, BIRTH_MONTH, BIRTH_DAY);
-            }
-            return birthday;
-        }
-
-
-        function updateCountdownDisplay() {
-            if (birthdayMode) return;
-            const target = getNextBirthdayDate();
-            const now = new Date();
-            const diff = target - now;
-            if (diff <= 0) {
-                if (countdownContainer) {
-                    countdownContainer.innerHTML = `<div class="birthday-surprise"><h3>🎉🎂 اليوم عيد ميلادكِ! 🎂🎉</h3><p style="margin-top:6px;">كل عام وأنتِ مصدر إلهام يا هاجر 💖</p><div>🎈🎁🎊</div></div>`;
-                }
-                startFireworks();
-                return;
-            }
-            const days = Math.floor(diff / (1000*60*60*24));
-            const hours = Math.floor((diff % 86400000) / 3600000);
-            const minutes = Math.floor((diff % 3600000) / 60000);
-            const daysStr = days < 10 ? '0'+days : days;
-            const hoursStr = hours < 10 ? '0'+hours : hours;
-            const minsStr = minutes < 10 ? '0'+minutes : minutes;
-
-
-            countdownContainer.innerHTML = `
-                <div style="margin-bottom:8px; font-weight:bold;">🎂 المتبقي على عيد ميلادكِ 🎂</div>
-                <div class="countdown-box">
-                    <div class="countdown-item"><div class="countdown-number">${daysStr}</div><div class="countdown-label">يوم</div></div>
-                    <div class="countdown-item"><div class="countdown-number">${hoursStr}</div><div class="countdown-label">ساعة</div></div>
-                    <div class="countdown-item"><div class="countdown-number">${minsStr}</div><div class="countdown-label">دقيقة</div></div>
-                </div>
-            `;
-        }
-
-
-        function startCountdown() {
-            if (countdownInterval) clearInterval(countdownInterval);
-            updateCountdownDisplay();
-            countdownInterval = setInterval(() => {
-                if (!birthdayMode) updateCountdownDisplay();
-            }, 60000);
-        }
-
-
-        function launchBirthdayCelebration() {
-            birthdayMode = true;
-            if (countdownInterval) clearInterval(countdownInterval);
-            countdownContainer.innerHTML = `
-                <div class="birthday-surprise">
-                    <h3>🎉🎂 كل عام وأنتِ نور الحياة 🎂🎉</h3>
-                    <p style="margin-top:6px;">عيد ميلاد سعيد يا هاجر حسين البنا 💖<br> ✨ يومكِ مليء بالفرح والإنجازات ✨</p>
-                    <div style="font-size:1.2rem;">🎈🎁🎊</div>
-                </div>
-            `;
-            startFireworks();
-        }
-
-
-        function startFireworks() {
-            const canvas = document.getElementById('confettiCanvas');
-            if (!canvas) return;
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            for (let i = 0; i < 80; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    size: Math.random() * 6 + 2,
-                    color: `hsl(${Math.random() * 60 + 20}, 90%, 65%)`,
-                    speedY: Math.random() * 4 + 2,
-                    speedX: (Math.random() - 0.5) * 1.8,
-                    rot: 0
-                });
-            }
-            function draw() {
-                if (!canvas || !ctx) return;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                let alive = false;
-                for (let p of particles) {
-                    if (p.y < canvas.height + 50) alive = true;
-                    p.y += p.speedY;
-                    p.x += p.speedX;
-                    p.rot += 0.1;
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate(p.rot);
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
-                    ctx.restore();
-                }
-                if (alive) requestAnimationFrame(draw);
-                else ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-            draw();
-            setTimeout(() => {
-                if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }, 4500);
-        }
-
-
-        function revealContent() {
-            if (revealed) return;
-            revealed = true;
-            panel.classList.add('show');
-            const svgEl = document.querySelector('.flower-svg');
-            if (svgEl) {
-                svgEl.style.filter = 'drop-shadow(0 0 14px #ffaa66)';
-                setTimeout(() => svgEl.style.filter = '', 500);
-            }
-            if (isBirthdayToday()) {
-                birthdayMode = true;
-                launchBirthdayCelebration();
-            } else {
-                birthdayMode = false;
-                startCountdown();
-            }
-        }
-
-
-        flower.addEventListener('click', revealContent);
-        flower.addEventListener('touchstart', revealContent, { passive: false });
-
-
-        // Dark Mode
-        const darkToggle = document.getElementById('darkModeToggle');
-        darkToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            const icon = darkToggle.querySelector('i');
-            const span = darkToggle.querySelector('span');
-            if (document.body.classList.contains('dark')) {
-                icon.className = 'fas fa-sun';
-                span.innerText = ' وضع فاتح';
-            } else {
-                icon.className = 'fas fa-moon';
-                span.innerText = ' الوضع المظلم';
-            }
-        });
-
-
-        // جسيمات الخلفية
-        function createParticles() {
-            const container = document.getElementById('particlesContainer');
-            for (let i = 0; i < 130; i++) {
-                let p = document.createElement('div');
-                p.classList.add('particle');
-                let size = Math.random() * 8 + 2;
-                p.style.width = size + 'px';
-                p.style.height = size + 'px';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDelay = Math.random() * 15 + 's';
-                p.style.animationDuration = 9 + Math.random() * 12 + 's';
-                p.style.animationName = 'floatComplex';
-                container.appendChild(p);
-            }
-        }
-        createParticles();
-
-
-        // ========== وظائف الموسيقى (النافذة المنبثقة المعدلة) ==========
-        const audio = document.getElementById('songAudio');
-        const modal = document.getElementById('musicModal');
-        const notifBtn = document.getElementById('notificationBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-
-        // الأزرار الجديدة (لا توجد أزرار +10 / -10)
-        const playBtn = document.getElementById('playBtn');
-        const pauseBtn = document.getElementById('pauseBtn');
-        const restartBtn = document.getElementById('restartBtn');
-
-        // فتح النافذة عند الضغط على زر الإشعارات
-        notifBtn.addEventListener('click', () => {
-            modal.classList.add('show');
-        });
-        
-        // إغلاق المودال
-        closeModalBtn.addEventListener('click', () => {
-            modal.classList.remove('show');
-        });
-        // إغلاق بالضغط خارج المحتوى
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.classList.remove('show');
-        });
-
-        // التحكم في الصوت - زر التشغيل
-        playBtn.addEventListener('click', () => {
-            audio.play().catch(e => console.log('التشغيل التلقائي محظور، اضغط مرة أخرى', e));
-        });
-        
-        // زر الإيقاف: يوقف التشغيل فقط ولا يغير الموضع الحالي (لا يعيد للمقدمة)
-        pauseBtn.addEventListener('click', () => {
-            audio.pause();
-        });
-        
-        // زر الإعادة: يعيد الصوت إلى البداية ويشغله
-        restartBtn.addEventListener('click', () => {
-            audio.currentTime = 0;
-            audio.play().catch(e => console.log('لم يتم التشغيل بعد الإعادة', e));
-        });
-
-        // في حالة حدوث خطأ في تحميل الملف audio.mp3 (للتذكير فقط)
-        audio.addEventListener('error', () => {
-            console.warn('ملف audio.mp3 غير موجود أو غير مدعوم، يرجى وضعه بجانب الموقع');
-        });
-
-        window.startConfettiAnimation = startFireworks;
+        function startCountdown(){ if(countdownInterval) clearInterval(countdownInterval); updateCountdownDisplay(); countdownInterval=setInterval(()=>{ if(!birthdayMode) updateCountdownDisplay(); },60000); }
+        function launchBirthdayCelebration(){ birthdayMode=true; if(countdownInterval) clearInterval(countdownInterval); countdownContainer.innerHTML=`<div class="birthday-surprise"><h3>🎉🎂 كل عام وأنتِ نور الحياة 🎂🎉</h3><p style="margin-top:6px;">عيد ميلاد سعيد يا هاجر حسين البنا 💖<br> ✨ يومكِ مليء بالفرح والإنجازات ✨</p><div style="font-size:1.2rem;">🎈🎁🎊</div></div>`; startFireworks(); }
+        function startFireworks(){ const canvas=document.getElementById('confettiCanvas'); if(!canvas) return; canvas.width=innerWidth; canvas.height=innerHeight; const ctx=canvas.getContext('2d'); let particles=[]; for(let i=0;i<80;i++) particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,size:Math.random()*6+2,color:`hsl(${Math.random()*60+20},90%,65%)`,speedY:Math.random()*4+2,speedX:(Math.random()-0.5)*1.8,rot:0}); function draw(){ if(!ctx) return; ctx.clearRect(0,0,canvas.width,canvas.height); let alive=false; for(let p of particles){ if(p.y<canvas.height+50) alive=true; p.y+=p.speedY; p.x+=p.speedX; p.rot+=0.1; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size); ctx.restore(); } if(alive) requestAnimationFrame(draw); else ctx.clearRect(0,0,canvas.width,canvas.height); } draw(); setTimeout(()=>{ if(ctx) ctx.clearRect(0,0,canvas.width,canvas.height); },4500); }
+        function revealContent(){ if(revealed) return; revealed=true; panel.classList.add('show'); const svg=document.querySelector('.flower-svg'); if(svg){ svg.style.filter='drop-shadow(0 0 14px #ffaa66)'; setTimeout(()=>svg.style.filter='',500); } if(isBirthdayToday()) launchBirthdayCelebration(); else startCountdown(); }
+        flower.addEventListener('click',revealContent); flower.addEventListener('touchstart',revealContent,{passive:false});
+        // dark mode
+        const darkToggle=document.getElementById('darkModeToggle');
+        darkToggle.addEventListener('click',()=>{ document.body.classList.toggle('dark'); const icon=darkToggle.querySelector('i'),span=darkToggle.querySelector('span'); if(document.body.classList.contains('dark')){ icon.className='fas fa-sun'; span.innerText=' وضع فاتح'; }else{ icon.className='fas fa-moon'; span.innerText=' الوضع المظلم'; } });
+        // particles
+        function createParticles(){ const container=document.getElementById('particlesContainer'); for(let i=0;i<130;i++){ let p=document.createElement('div'); p.classList.add('particle'); let size=Math.random()*8+2; p.style.width=size+'px'; p.style.height=size+'px'; p.style.left=Math.random()*100+'%'; p.style.animationDelay=Math.random()*15+'s'; p.style.animationDuration=9+Math.random()*12+'s'; container.appendChild(p); } } createParticles();
+        // مشغل الموسيقى مع شريط تقدم LTR
+        const audio=document.getElementById('songAudio');
+        const modal=document.getElementById('musicModal');
+        const notifBtn=document.getElementById('notificationBtn');
+        const closeModalBtn=document.getElementById('closeModalBtn');
+        const playBtn=document.getElementById('playBtn'), pauseBtn=document.getElementById('pauseBtn'), restartBtn=document.getElementById('restartBtn');
+        const progressFill=document.getElementById('progressFill'), progressBarBg=document.getElementById('progressBarBg');
+        const currentTimeSpan=document.getElementById('currentTime'), durationSpan=document.getElementById('duration');
+        function formatTime(sec){ if(isNaN(sec)) return '00:00'; const m=Math.floor(sec/60), s=Math.floor(sec%60); return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`; }
+        function updateProgress(){ if(audio.duration && isFinite(audio.duration)){ const percent=(audio.currentTime/audio.duration)*100; progressFill.style.width=percent+'%'; currentTimeSpan.textContent=formatTime(audio.currentTime); durationSpan.textContent=formatTime(audio.duration); }else{ progressFill.style.width='0%'; currentTimeSpan.textContent='00:00'; durationSpan.textContent='00:00'; } }
+        audio.addEventListener('loadedmetadata',()=>{ durationSpan.textContent=formatTime(audio.duration); updateProgress(); });
+        audio.addEventListener('timeupdate',updateProgress);
+        audio.addEventListener('durationchange',()=>{ durationSpan.textContent=formatTime(audio.duration); updateProgress(); });
+        // شريط التقدم: النقر (الاتجاه الطبيعي بسبب LTR)
+        progressBarBg.addEventListener('click',(e)=>{ if(audio.duration && isFinite(audio.duration)){ const rect=progressBarBg.getBoundingClientRect(); let clickX=e.clientX-rect.left; let percent=clickX/rect.width; percent=Math.min(1,Math.max(0,percent)); audio.currentTime=percent*audio.duration; updateProgress(); } });
+        notifBtn.addEventListener('click',()=>modal.classList.add('show'));
+        closeModalBtn.addEventListener('click',()=>{ modal.classList.remove('show'); audio.pause(); });
+        modal.addEventListener('click',(e)=>{ if(e.target===modal){ modal.classList.remove('show'); audio.pause(); } });
+        playBtn.addEventListener('click',()=>audio.play().catch(e=>console.warn(e)));
+        pauseBtn.addEventListener('click',()=>audio.pause());
+        restartBtn.addEventListener('click',()=>{ audio.currentTime=0; audio.play().catch(e=>console.warn(e)); });
+        audio.addEventListener('error',()=>console.warn('ملف audio.mp3 غير موجود'));
     })();
 </script>
 </body>
